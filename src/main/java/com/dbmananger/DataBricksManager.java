@@ -11,7 +11,7 @@ public class DataBricksManager {
     private static final String url = "jdbc:spark://adb-5367625637145207.7.azuredatabricks.net:443/default;transportMode=http;ssl=1;AuthMech=3;httpPath=/sql/1.0/warehouses/3393612e8cb11a78;/default";
 
     private static final String username = "token";
-    private static final String password = "dapifbdd338b0babb9ba29356c1662ff4f6e";
+    private static final String password = "";
 
     public List<String> getTables() {
         List<String> tables = new ArrayList<>();
