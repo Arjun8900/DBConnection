@@ -12,6 +12,47 @@ public class AWSOracleDBManager {
     private static final String username = "admin";
     private static final String password = "adminroot";
 
+    public List<String> getTablesWithCache() {
+        List<String> tables = new ArrayList<>();
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection connection = DriverManager.getConnection(url, username, password);
+            Statement statement = connection.createStatement();
+            String QUERY = "select * from user_tables";
+            ResultSet resultSet = statement.executeQuery(QUERY);
+            while (resultSet.next()) {
+                String pid = resultSet.getString(1);
+                tables.add(pid);
+            }
+            statement.close();
+            connection.close();
+            return tables;
+        } catch (Exception e) {
+            System.out.println("ERROR: Not able to Connect to AWS DB Exception" + e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<String> getTables(String dbName) {
+        List<String> tables = new ArrayList<>();
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection connection = DriverManager.getConnection(url, username, password);
+            Statement statement = connection.createStatement();
+            String QUERY = "select * from " + dbName;
+            ResultSet resultSet = statement.executeQuery(QUERY);
+            while (resultSet.next()) {
+                String pid = resultSet.getString(1);
+                tables.add(pid);
+            }
+            statement.close();
+            connection.close();
+            return tables;
+        } catch (Exception e) {
+            System.out.println("ERROR: Not able to Connect to AWS DB Exception" + e);
+            throw new RuntimeException(e);
+        }
+    }
     public List<String> getTables() {
         List<String> tables = new ArrayList<>();
         try {
